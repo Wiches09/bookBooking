@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'book_bookings',
-        'USER': 'postgres'
+        'USER': 'postgres',
         'PASSWORD': 'abc11223az',
         'HOST': 'localhost',
         'PORT': '5432',
