@@ -7,4 +7,4 @@ from django.db.models import Q
 
 class index(View):
     def get(self, request):
-        return render(request, "test.html")
+        return render(request, "index.html")
