@@ -3,8 +3,6 @@ from django.views import View
 from django.db.models import Q
 
 # Create your views here.
-
-
-class Index(View):
+class BookManagement(View):
     def get(self, request):
-        return render(request, "index.html")
+        return 0
