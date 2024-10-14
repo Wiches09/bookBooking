@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block page_title %}{% endblock %}</title>
-    <style></style>
+
 </head>
 <body>
     {% block nav %} {% include 'nav.html' %} {% endblock %}
@@ -13,4 +13,7 @@
         {% block content %} {% endblock %}
     </main>
 </body>
+{% block script %}
+  <link rel="stylesheet" href="{% static '/style.css' %}">
+{% endblock %}
 </html>
