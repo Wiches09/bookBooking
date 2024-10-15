@@ -8,12 +8,16 @@
     <style></style>
 </head>
 <body>
-    {% block nav %} {% include 'nav.html' %} {% endblock %}
+    {% block nav %} {% include 'navStaff.html' %} {% endblock %}
     <main>
         {% block content %} {% endblock %}
     </main>
 </body>
 {% block script %}
+<<<<<<< HEAD:bookBooking/manageBook/templates/layoutStaff.html
+<link rel="stylesheet" href="{% static '/style_staff.css' %}" />
+=======
 <link rel="stylesheet" href="{% static '/style.css' %}" />
+>>>>>>> de7b4a755b5b555c2740f04135b3426257ffa31e:bookBooking/manageBook/templates/layout.html
 {% endblock %}
 </html>

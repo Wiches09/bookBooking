@@ -5,4 +5,4 @@ from django.db.models import Q
 # Create your views here.
 class BookManagement(View):
     def get(self, request):
-        return 0
+        return render(request, "indexStaff.html")
