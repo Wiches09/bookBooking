@@ -10,14 +10,30 @@
 </head>
 <body>
     {% block content %}
+    <!-- search panel -->
     <div class="columns-search">
-        <div class="column">
+        <div class="column-searchBar">
             <input class="input" id="search-bar" type="text" name="search" placeholder="ค้นหาหนังสือ หมวดหนังสือ หรือผู้แต่ง">
         </div>
-        <div class="column">
+        <div class="column-searchBtn">
           <input class="button" id="search-btn" type="submit" value="Search">
       </div>
     </div>
+    <!-- book list -->
+     <div class="column-bookList">
+        <div class="book-wrapper">
+            <div class="book-coverWrapper">
+                <img id="book-cover" src="">
+            </div>
+            <div class="detail-wrapper">
+                <p id="book-title"></p>
+                <p id="book-category"></p>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    
+
     {% endblock content %}
 </body>
 </html>
