@@ -3,7 +3,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
-
 class Account(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
@@ -35,7 +34,6 @@ class Staff(models.Model):
 
 
 class BookStatus(models.Model):
-    # e.g., available, borrowed, reserved
     status = models.CharField(max_length=10)
 
     def __str__(self):
@@ -51,7 +49,7 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True, blank=True)
     book = models.ForeignKey('manageBook.Book', on_delete=models.CASCADE)
 
     def __str__(self):

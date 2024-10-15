@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.db.models import Q
 from django.http import HttpRequest
-from .models import *
+from booking.models import *
+from manageBook.models import *
 
 # Create your views here.
 
