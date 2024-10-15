@@ -10,6 +10,14 @@
 </head>
 <body>
     {% block content %}
+    <div class="columns-search">
+        <div class="column">
+            <input class="input" id="search-bar" type="text" name="search" placeholder="ค้นหาหนังสือ หมวดหนังสือ หรือผู้แต่ง">
+        </div>
+        <div class="column">
+          <input class="button" id="search-btn" type="submit" value="Search">
+      </div>
+    </div>
     {% endblock content %}
 </body>
 </html>
