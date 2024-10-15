@@ -21,17 +21,18 @@
         <div class="columns-form">
           {{ form.non_field_errors }}
           <form method="POST" action="{% url 'login' %}">
-          {% csrf_token %}
-          {{ form.username.errors }}
-          <div class="column-username">
-            <label for="username" class="form-label">ชื่อผู้ใช้</label>
-            <input type="text" class="form-input" id="username" name="username" required>
-          </div>
-          {{ form.password.errors }}
-          <div class="column-password">
-            <label for="password" class="form-label">รหัสผ่าน</label>
-            <input type="password" class="form-input" id="password" name="password" required>
-          </div>
+            {% csrf_token %}
+            {{ form.username.errors }}
+            <div class="column-username">
+              <label for="username" class="form-label">ชื่อผู้ใช้</label>
+              <input type="text" class="form-input" id="username" name="username" required>
+            </div>
+            {{ form.password.errors }}
+            <div class="column-password">
+              <label for="password" class="form-label">รหัสผ่าน</label>
+              <input type="password" class="form-input" id="password" name="password" required>
+            </div>
+          </form>
         </div>
         <!-- submit button -->
         <div class="column-submitBtn">
@@ -39,7 +40,7 @@
         </div>
 
         <div>
-          <!-- <a href="{% url 'register' %}">หรือ สมัครสมาชิก</a> -->
+          <a href="{% url 'register' %}">หรือ สมัครสมาชิก</a>
         </div>
       </div>
 

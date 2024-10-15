@@ -11,6 +11,7 @@
 <body>
     {% block content %}
     <!-- search panel -->
+    <form action="{% url 'index' %}">
     <div class="columns-search">
         <div class="column-searchBar">
             <input class="input" id="search-bar" type="text" name="search" placeholder="ค้นหาหนังสือ หมวดหนังสือ หรือผู้แต่ง">
@@ -33,7 +34,7 @@
         </div>
     </div>
     
-
+    </form>
     {% endblock content %}
 </body>
 </html>

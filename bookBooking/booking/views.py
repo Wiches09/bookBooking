@@ -15,9 +15,9 @@ class Index(View):
 
         if query.get("search"):
             book = books.filter(
-                Q(name__name__icontains=query.get("search")) |
-                Q(author__name__icontains=query.get("search")) |
-                Q(author__name__icontains=query.get("search"))
+                Q(name__icontains=query.get("search")) |
+                Q(author__icontains=query.get("search")) |
+                Q(categories__name__icontains=query.get("search"))
             )
 
         return render(request, "index.html", {

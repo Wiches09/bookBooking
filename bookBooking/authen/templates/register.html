@@ -1,0 +1,52 @@
+{% extends "layout.html" %} {% block page_title %}login{% endblock page_title %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    
+</head>
+<body>
+    {% block nav %}{% endblock %}
+    {% block content %}
+    <div class="columns-register" >
+      <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div>
+            {{ form.username.errors }}
+            <div class="column-username">
+              <label for="username" class="form-label">ชื่อผู้ใช้</label>
+              <input type="text" class="form-input" id="username" name="username" required>
+            </div>
+            {{ form.first_name.errors }}
+            <div class="column-first_name">
+              <label for="first_name" class="form-label">ชื่อ</label>
+              <input type="text" class="form-input" id="first_name" name="first_name" required>
+            </div>
+            {{ form.last_name.errors }}
+            <div class="column-last_name">
+              <label for="last_name" class="form-label">นามสกุล</label>
+              <input type="text" class="form-input" id="last_name" name="last_name" required>
+            </div>
+            {{ form.email.errors }}
+            <div class="column-email">
+              <label for="email" class="form-label">อีเมล</label>
+              <input type="email" class="form-input" id="email" name="email" required>
+            </div>
+            {{ form.password.errors }}
+            <div class="column-password">
+              <label for="password" class="form-label">รหัสผ่าน</label>
+              <input type="password" class="form-input" id="password" name="password" required>
+            </div>
+            
+          <div class="column-submitBtn">
+            <button type="submit">สมัครสมาชิก</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    {% endblock content %}
+</body>
+</html>
