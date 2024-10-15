@@ -1,0 +1,58 @@
+{% extends "layout.html" %} {% block page_title %}login{% endblock page_title %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    
+</head>
+<body>
+    {% block nav %}{% endblock %}
+    {% block content %}
+    <div class="columns-login">
+      <div>
+        <div class="column-title">
+          <h2 class="title">Login</h2>
+        </div>
+        
+        <!-- login form -->
+        <div class="columns-form">
+          {{ form.non_field_errors }}
+          <form method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+          {{ form.username.errors }}
+          <div class="column-username">
+            <label for="username" class="form-label">ชื่อผู้ใช้</label>
+            <input type="text" class="form-input" id="username" name="username" required>
+          </div>
+          {{ form.password.errors }}
+          <div class="column-password">
+            <label for="password" class="form-label">รหัสผ่าน</label>
+            <input type="password" class="form-input" id="password" name="password" required>
+          </div>
+        </div>
+        <!-- submit button -->
+        <div class="column-submitBtn">
+          <button type="submit">เข้าสู่ระบบ</button>
+        </div>
+
+        <div>
+          <!-- <a href="{% url 'register' %}">หรือ สมัครสมาชิก</a> -->
+        </div>
+      </div>
+
+      
+      
+      {% if messages %}
+                  <div>
+                      {% for message in messages %}
+                          <p class="text-danger">{{ message }}</p>
+                      {% endfor %}
+                  </div>
+      {% endif %}
+    </div>
+    {% endblock content %}
+</body>
+</html>
