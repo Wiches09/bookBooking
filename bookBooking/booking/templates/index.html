@@ -12,7 +12,6 @@
     {% block content %}
     <!-- search panel -->
     <form action="{% url 'index' %}">
-        {% comment %} {% csrf_token %} {% endcomment %}
     <div class="columns-search">
         <div class="column-searchBar">
             <input class="input" id="search-bar" type="text" name="search" placeholder="ค้นหาหนังสือ หมวดหนังสือ หรือผู้แต่ง">
@@ -23,18 +22,6 @@
     </div>
     <!-- book list -->
     {% for book in books %}
-    {% comment %} <div class="list-book" style="">
-        <div class="book-cover" style="">
-            <p>pretend its book cover no.{{book.id}}</p>
-        </div>
-        <div class="book-detail" style="">
-            <p>{{ book.name }}</p>
-        </div>
-    </div> {% endcomment %}
-    <div><p>{{book.name}}</p></div>
-    {% empty %}
-    <p>There is no book </p>
-    {% endfor %}
      <div class="column-bookList">
         <div class="book-wrapper">
             <div class="book-coverWrapper">
@@ -47,6 +34,9 @@
             <div></div>
         </div>
     </div>
+    {% empty %}
+    <p>There is no book </p>
+    {% endfor %}
     </form>
 
     {% endblock content %}
