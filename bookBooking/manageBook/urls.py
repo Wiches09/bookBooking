@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
 
-    path("index/", views.QueueManagement.as_view(), name="manageBook")
+    path("index/", views.QueueManagementView.as_view(), name="manageBook")
 ]
