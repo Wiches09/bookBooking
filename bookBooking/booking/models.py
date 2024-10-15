@@ -66,13 +66,15 @@ class BorrowBook(models.Model):
 
 
 class BorrowHistory(models.Model):
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)
+    member = models.ForeignKey(
+        Member, on_delete=models.CASCADE, null=True, blank=True)
     borrow_date = models.DateField()
     return_date = models.DateField(null=True, blank=True)
     book_returned = models.DateField(null=True, blank=True)
     fine = models.DecimalField(decimal_places=2, max_digits=5)
     status = models.ForeignKey(BookStatus, on_delete=models.CASCADE)
-    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True)
+    staff = models.ForeignKey(
+        Staff, on_delete=models.CASCADE, null=True, blank=True)
 
     position_in_queue = models.PositiveIntegerField(null=True, blank=True)
     queue_date = models.DateField(null=True, blank=True)
