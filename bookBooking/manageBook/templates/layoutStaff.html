@@ -8,12 +8,12 @@
     <style></style>
 </head>
 <body>
-    {% block nav %} {% include 'nav.html' %} {% endblock %}
+    {% block nav %} {% include 'navStaff.html' %} {% endblock %}
     <main>
         {% block content %} {% endblock %}
     </main>
 </body>
 {% block script %}
-<link rel="stylesheet" href="{% static '/style.css' %}" />
+<link rel="stylesheet" href="{% static '/style_staff.css' %}" />
 {% endblock %}
 </html>
