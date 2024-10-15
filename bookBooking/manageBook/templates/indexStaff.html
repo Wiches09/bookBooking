@@ -1,4 +1,4 @@
-{% extends "layoutStaff.html" %} {% block page_title %}test{% endblock page_title %}
+{% extends "layoutStaff.html" %} {% block page_title %}All Book{% endblock page_title %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,11 @@
 </head>
 <body>
     {% block content %}
-    
+    {% for book in books %}
+    <p>{{ book.name }}</p>
+    {% empty %}
+    <p>There is no book </p>
+    {% endfor %}
     {% endblock content %}
 </body>
 </html>

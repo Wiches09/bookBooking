@@ -5,14 +5,31 @@ from django.http import HttpRequest
 from booking.models import *
 from manageBook.models import *
 from django.shortcuts import get_object_or_404
+from manageBook.forms import *
 
 
 # Create your views here.
 class QueueManagementView(View):
     def get(self, request: HttpRequest):
         book = Book.objects.all()
+        form = SearchBookForm()
         context = {
-            "book": book
+            "books": book,
+            "form": form
+        }
+        return render(request, "indexStaff.html", context)
+
+    def post(self, request: HttpRequest):
+        form = SearchBookForm(request.POST)
+        book = Book.objects.all()
+
+        if form.is_valid():
+            query = form.cleaned_data['keyWord']
+            book = Book.objects.filter(name__icontains=query)
+
+        context = {
+            "books": book,
+            "form": form
         }
         return render(request, "indexStaff.html", context)
 

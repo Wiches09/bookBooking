@@ -7,13 +7,21 @@
 body {
   background-color: #e3e3e3;
   font-family: "Kanit", sans-serif;
-  color: #e3e3e3;
+  color: #000000;
+}
+
+body p {
+  color: #000000;
 }
 
 main {
   margin-left: 15%;
   margin-right: 15%;
   margin-top: 3em;
+}
+
+main p {
+  color: #000000;
 }
 
 button {
