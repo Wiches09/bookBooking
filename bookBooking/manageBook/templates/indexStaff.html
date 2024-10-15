@@ -10,8 +10,20 @@
 </head>
 <body>
     {% block content %}
+    <form action="{% url 'searchBook' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Search">
+    </form>
     {% for book in books %}
-    <p>{{ book.name }}</p>
+    <div class="list-book" style="">
+        <div class="book-cover" style="">
+            <p>pretend its book cover no.{{book.id}}</p>
+        </div>
+        <div class="book-detail" style="">
+            <p>{{ book.name }}</p>
+        </div>
+    </div>
     {% empty %}
     <p>There is no book </p>
     {% endfor %}

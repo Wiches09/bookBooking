@@ -11,35 +11,39 @@ from manageBook.forms import *
 # Create your views here.
 class QueueManagementView(View):
     def get(self, request: HttpRequest):
-        book = Book.objects.all()
+        books = Book.objects.all()
         form = SearchBookForm()
         context = {
-            "books": book,
+            "books": books,
             "form": form
         }
         return render(request, "indexStaff.html", context)
 
     def post(self, request: HttpRequest):
         form = SearchBookForm(request.POST)
-        book = Book.objects.all()
-
         if form.is_valid():
             query = form.cleaned_data['keyWord']
-            book = Book.objects.filter(name__icontains=query)
+            if query:
+                books = Book.objects.filter(name__icontains=query)
+            else:
+                books = Book.objects.all()
+        else:
+            books = Book.objects.all()
 
         context = {
-            "books": book,
+            "books": books,
             "form": form
         }
         return render(request, "indexStaff.html", context)
 
 
+
 class QueueDetailView(View):
     def get(self, request: HttpRequest, pk):
-        book = get_object_or_404(Book, pk=pk)
+        books = get_object_or_404(Book, pk=pk)
         # form = BookForm(instance=book)
         context = {
-            "book": book,
+            "book": books,
             # "form": form
         }
         return render(request, "queueDetail.html", context)

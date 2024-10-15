@@ -11,14 +11,15 @@ from manageBook.models import *
 class Index(View):
     def get(self, request):
         query = request.GET
-        books = Book.objects.all()
 
         if query.get("search"):
-            book = books.filter(
-                Q(name__name__icontains=query.get("search")) |
-                Q(author__name__icontains=query.get("search")) |
-                Q(author__name__icontains=query.get("search"))
+            books = Book.objects.filter(
+                Q(name__icontains=query.get("search")) |
+                Q(author__icontains=query.get("search")) |
+                Q(categories__name__icontains=query.get("search"))
             )
+        else:
+            books = Book.objects.all()
 
         return render(request, "index.html", {
             "books": books
