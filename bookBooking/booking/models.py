@@ -23,7 +23,8 @@ class Cart(models.Model):
 class CartItem(models.Model):
     cart = models.ForeignKey(
         Cart, on_delete=models.CASCADE, null=True, blank=True)
-    book = models.ForeignKey('manageBook.Book', on_delete=models.CASCADE, null=True)
+    book = models.ForeignKey(
+        'manageBook.Book', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"{self.book.name} in cart of {self.cart.member.first_name}"
@@ -49,6 +50,8 @@ class BorrowHistory(models.Model):
 
     position_in_queue = models.PositiveIntegerField(null=True, blank=True)
     queue_date = models.DateField(null=True, blank=True)
+    book = models.ForeignKey(
+        'manageBook.Book', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"{self.member.first_name} borrow history for {self.borrow_date}"
