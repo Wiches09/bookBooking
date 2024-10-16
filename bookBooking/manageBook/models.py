@@ -9,7 +9,6 @@ class Book(models.Model):
     publish_date = models.DateField()
     categories = models.ManyToManyField("manageBook.Category")
     description = models.TextField()
-    image = models.ImageField(default=1)
 
     def __str__(self):
         return self.name
