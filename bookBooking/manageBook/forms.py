@@ -1,5 +1,7 @@
 from django import forms
 from booking.models import BookStatus
+from django.forms import ModelForm
+from manageBook.models import Book
 
 
 class SearchBookForm(forms.Form):
@@ -11,3 +13,18 @@ class BookStatusForm(forms.Form):
         queryset=BookStatus.objects.all(),
         label="Select Status",
     )
+
+
+class AddBookForm(ModelForm):
+    
+    
+    class Meta:
+        model = Book
+        fields = [
+            'name',
+            'author',
+            'publisher',
+            'publish_date',
+            'categories',
+            'description',
+        ]
