@@ -5,16 +5,15 @@
 }
 
 body {
-  background-color: #d9d9d9bd;
+  background-color: #d9d9d9;
   font-family: "Kanit", sans-serif;
   color: #000000;
 }
 
 main {
+  background-color: #d9d9d9;
   margin-left: 15%;
   margin-right: 15%;
-  margin-top: 3em;
-  margin-bottom: 2em;
 }
 
 button {
@@ -54,12 +53,15 @@ nav a:hover {
 
 /* book-list */
 .searchPanel {
+  padding: 2%;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #search-bar {
-  width: 1000px;
+  width: 800px;
   height: 50px;
   font-size: 120%;
   border-radius: 50px;
@@ -73,11 +75,13 @@ nav a:hover {
   font-size: 120%;
   margin-left: 10%;
   border-radius: 50px;
+  border-style: none;
 }
 
 #search-btn:hover {
   background-color: #2cad89;
   cursor: pointer;
+  color: #d9d9d9;
 }
 
 .bookList {
@@ -177,6 +181,7 @@ nav a:hover {
 /* Book detail */
 #book_detail_title {
   text-align: center;
+  font-weight: 400;
 }
 
 .BookDetail-book-wrapper {
