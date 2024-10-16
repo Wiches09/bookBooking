@@ -34,7 +34,7 @@ class BorrowBook(models.Model):
         'booking.BorrowHistory', null=True, blank=True, on_delete=models.CASCADE)
     book = models.ForeignKey(
         'manageBook.Book', on_delete=models.CASCADE, null=True, blank=True)
-    queue_date = models.DateField(null=True, blank=True)
+    queue_date = models.DateField(null=True)
     borrow_date = models.DateField(null=True, blank=True)
     status = models.ForeignKey(BookStatus, default=1, on_delete=models.CASCADE)
 
@@ -42,7 +42,6 @@ class BorrowBook(models.Model):
 class BorrowHistory(models.Model):
     member = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True, related_name='borrower')
-    borrow_date = models.DateField()
 
     def __str__(self):
         return f"{self.member.first_name} borrow history for {self.borrow_date}"
