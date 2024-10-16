@@ -14,7 +14,6 @@ class BookStatus(models.Model):
 
 class Cart(models.Model):
     member = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    create_date = models.DateField()
 
     def __str__(self):
         return f"Cart of {self.member.first_name}"
@@ -22,7 +21,7 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     cart = models.ForeignKey(
-        Cart, on_delete=models.CASCADE, null=True, blank=True)
+        Cart, related_name='items', on_delete=models.CASCADE, null=True, blank=True)
     book = models.ForeignKey(
         'manageBook.Book', on_delete=models.CASCADE, null=True)
 
