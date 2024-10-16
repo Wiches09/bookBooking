@@ -29,7 +29,7 @@ class Index(View):
         })
 
 
-class BookDetail(View):
+class BookDetailView(View):
     def get(self, request, book_id):
         book_detail = Book.objects.get(id=book_id)
         cart, created = Cart.objects.get_or_create(member_id=request.user.id)
@@ -58,3 +58,11 @@ class CartView(View):
         items = cart.items.all()
         
         return render(request, "cart.html", {'items': items})
+    
+class BorrowHistoryView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
+        borrow_history = BorrowHistory.objects.get()
+        return render(request, "borrow-history")
