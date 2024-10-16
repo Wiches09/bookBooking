@@ -6,10 +6,14 @@ from booking.models import *
 from manageBook.models import *
 from django.shortcuts import get_object_or_404
 from manageBook.forms import *
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
 
 # Create your views here.
-class QueueManagementView(View):
+class QueueManagementView(PermissionRequiredMixin, LoginRequiredMixin, View):
+    login_url = '/authen/'
+    permission_required = ["booking.change_bookstatus"]
+
     def get(self, request: HttpRequest):
         books = Book.objects.all()
         form = SearchBookForm()
@@ -37,7 +41,10 @@ class QueueManagementView(View):
         return render(request, "indexStaff.html", context)
 
 
-class QueueDetailView(View):
+class QueueDetailView(PermissionRequiredMixin, LoginRequiredMixin, View):
+    login_url = '/authen/'
+    permission_required = ["booking.change_bookstatus"]
+
     def get(self, request: HttpRequest, pk):
         books = get_object_or_404(Book, pk=pk)
         queue = BorrowBook.objects.filter(book=books, status_id__in=[

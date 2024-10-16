@@ -57,7 +57,10 @@ class BookDetailView(View):
         return redirect(reverse('book-detail', args=[book.id]))
 
 
-class CartView(LoginRequiredMixin, View):
+class CartView(PermissionRequiredMixin, LoginRequiredMixin, View):
+    login_url = '/authen/'
+    permission_required = ["booking.view_cart"]
+
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('login')
@@ -67,7 +70,10 @@ class CartView(LoginRequiredMixin, View):
         return render(request, "cart.html", {'items': items, 'cart': cart})
 
 
-class ConfirmBooking(View):
+class ConfirmBooking(PermissionRequiredMixin, LoginRequiredMixin, View):
+    login_url = '/authen/'
+    permission_required = ["booking.add_borrowbook"]
+
     def post(self, request, cart_id):
         cart = get_object_or_404(Cart, id=cart_id)
         books_in_cart = CartItem.objects.filter(cart=cart)
@@ -90,7 +96,10 @@ class ConfirmBooking(View):
         return redirect('index')
 
 
-class RemoveBookFromCart(View):
+class RemoveBookFromCart(PermissionRequiredMixin, LoginRequiredMixin, View):
+    login_url = '/authen/'
+    permission_required = ["booking.delete_borrowbook"]
+
     def post(self, request, cart_id, book_id):
         cart = get_object_or_404(Cart, id=cart_id)
         book = get_object_or_404(Book, id=book_id)
@@ -102,7 +111,10 @@ class RemoveBookFromCart(View):
         return redirect('cart')
 
 
-class BorrowHistoryView(View):
+class BorrowHistoryView(PermissionRequiredMixin, LoginRequiredMixin, View):
+    login_url = '/authen/'
+    permission_required = ["booking.view_borrowhistory"]
+
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('login')
@@ -113,8 +125,12 @@ class BorrowHistoryView(View):
         return render(request, "borrow-history.html", {
             'borrow_history': borrow_history
         })
-    
-class BorrowListView(View):
+
+
+class BorrowListView(PermissionRequiredMixin, LoginRequiredMixin, View):
+    login_url = '/authen/'
+    permission_required = ["booking.view_borrowhistory"]
+
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('login')
@@ -128,6 +144,8 @@ class BorrowListView(View):
 
         if borrow_list.exists():
             borrow_date = borrow_list.first().borrow_date
+        else:
+            borrow_date = None
 
         return render(request, "borrow-book-detail.html", {
             'borrow_list': borrow_list,
