@@ -10,15 +10,8 @@
 </head>
 <body>
     {% block content %}
-    {% for item in items %}
-        <li>
-            {{ item.product.name }} - ${{ item.product.price }}
-            <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
-        </li>
-    {% empty %}
-        <li>Your cart is empty.</li>
-    {% endfor %}
-
+        {% empty %}
+        <p>คุณไม่มีประวัติการยืม!</p>
     {% endblock content %}
 </body>
 </html>

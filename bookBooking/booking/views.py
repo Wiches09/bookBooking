@@ -43,6 +43,8 @@ class BookDetailView(View):
 
 class AddToCart(View):
     def post(self, request, book_id):
+        # if not request.user.is_authenticated:
+        #     return redirect('login')
         book = Book.objects.get(id=book_id)
         cart, created = Cart.objects.get_or_create(member_id=request.user.id)
         cart_item = CartItem.objects.create(cart=cart, book=book)
@@ -54,6 +56,8 @@ class AddToCart(View):
 
 class CartView(View):
     def get(self, request):
+        # if not request.user.is_authenticated:
+        #     return redirect('login')
         cart, created = Cart.objects.get_or_create(member=request.user)
         items = cart.items.all()
         
@@ -61,8 +65,9 @@ class CartView(View):
     
 class BorrowHistoryView(View):
     def get(self, request):
-        if not request.user.is_authenticated:
-            return redirect('login')
-        
-        borrow_history = BorrowHistory.objects.get()
-        return render(request, "borrow-history")
+        # if not request.user.is_authenticated:
+        #     return redirect('login')
+        borrow_history = BorrowHistory.objects.get(member=request.user)
+        return render(request, "borrow-history", {
+            'borrow_history': borrow_history
+        })
