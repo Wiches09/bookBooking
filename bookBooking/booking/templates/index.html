@@ -21,22 +21,28 @@
       </div>
     </div>
     <!-- book list -->
-    {% for book in books %}
+    
      <div class="column-bookList">
-        <div class="book-wrapper">
-            <div class="book-coverWrapper">
-                <img id="book-cover" src="">
+        {% for book in books %}
+        <a class ="book-detailLink" href="">
+            <div class="book-wrapper">
+                <div class="book-coverWrapper">
+                    <img class="book-cover" src="https://th.bing.com/th/id/OIP.xONRNGDuga-3ecOyGMje2AAAAA?rs=1&pid=ImgDetMain">
+                </div>
+                <div class="detail-wrapper">
+                    <h3 class="detail">{{ book.name }}</h3>
+                    {% for category in book.categories.all %}
+                    <p class="detail">{{ category.name }}</p>
+                    {% endfor %}
+                </div>
+                <div></div>
             </div>
-            <div class="detail-wrapper">
-                <p id="book-title"></p>
-                <p id="book-category"></p>
-            </div>
-            <div></div>
-        </div>
+        </a>
+        {% empty %}
+        <p>There is no book </p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p>There is no book </p>
-    {% endfor %}
+    
     </form>
 
     {% endblock content %}

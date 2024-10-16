@@ -80,9 +80,35 @@ nav a:hover {
 }
 
 .column-bookList {
-  display: flex;
-  gap: 50px;
+  display: grid;
+  gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 5%;
+}
+
+.book-coverWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-wrapper .detail {
+  text-align: center;
+  color: #000000;
+}
+
+.book-detailLink {
+  text-decoration: none;
+}
+
+.detail-wrapper h3 {
+  font-size: 150%;
+  font-weight: 400;
+}
+
+.book-cover {
+  width: 200px;
+  height: 300px;
 }
 
 /* login */
