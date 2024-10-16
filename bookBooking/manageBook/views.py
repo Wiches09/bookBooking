@@ -41,9 +41,9 @@ class QueueManagementView(View):
 class QueueDetailView(View):
     def get(self, request: HttpRequest, pk):
         books = get_object_or_404(Book, pk=pk)
-        # form = BookForm(instance=book)
+        borrow_histories = books.borrowhistory_set.all()
         context = {
-            "book": books,
-            # "form": form
+            'book': books,
+            'borrow_histories': borrow_histories
         }
-        return render(request, "queueDetail.html", context)
+        return render(request, "detailQueue.html", context)

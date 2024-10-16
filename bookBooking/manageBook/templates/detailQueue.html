@@ -1,0 +1,27 @@
+{% extends "layoutStaff.html" %} {% block page_title %}Book Queue{% endblock page_title %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    
+</head>
+<body>
+    {% block content %}
+    {% for queue in borrow_histories %}
+    <div class="list-book" style="">
+            <div class="book-cover" style="">
+                <p>pretend its book cover no.{{book.id}}</p>
+            </div>
+            <div class="book-detail" style="">
+                <p>{{ queue.member.first_name }}</p>
+            </div>
+        </div>
+    {% empty %}
+    <p>There is no queue </p>
+    {% endfor %}
+    {% endblock content %}
+</body>
+</html>
