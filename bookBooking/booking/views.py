@@ -71,13 +71,22 @@ class ConfirmBooking(View):
     def post(self, request, cart_id):
         cart = get_object_or_404(Cart, id=cart_id)
         books_in_cart = CartItem.objects.filter(cart=cart)
-        
+
         for cart_item in books_in_cart:
             book = cart_item.book
-            BorrowHistory.objects.create(member=request.user, book=book)
+            
+            borrow_history = BorrowHistory.objects.create(member=request.user)
+            
+            BorrowBook.objects.create(
+                history=borrow_history,
+                book=book,
+                queue_date=date.today(),
+                borrow_date=date.today(),
+                status=BookStatus.objects.get(id=1)
+            )
             
         cart.items.all().delete()
-            
+
         return redirect('index')
     
 class BorrowHistoryView(View):
