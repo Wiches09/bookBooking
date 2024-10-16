@@ -37,13 +37,39 @@ class QueueManagementView(View):
         return render(request, "indexStaff.html", context)
 
 
-
 class QueueDetailView(View):
     def get(self, request: HttpRequest, pk):
         books = get_object_or_404(Book, pk=pk)
-        borrow_histories = books.borrowhistory_set.all()
+        queue = BorrowBook.objects.filter(book=books, status_id__in=[
+                                          1, 2, 3]).select_related('history').order_by('queue_date')
+        form = BookStatusForm()
+
+        queue_context = []
+        for queue_item in queue:
+            form = BookStatusForm(initial={'status': queue_item.status})
+            queue_context.append({
+                'queue_item': queue_item,
+                'form': form,
+            })
+
         context = {
             'book': books,
-            'borrow_histories': borrow_histories
+            'queue': queue_context,
         }
         return render(request, "detailQueue.html", context)
+
+    def post(self, request, pk):
+        books = get_object_or_404(Book, pk=pk)
+        queue_item_id = request.POST.get('queue_item_id')
+        queue_item = get_object_or_404(BorrowBook, id=queue_item_id)
+
+        form = BookStatusForm(request.POST)
+
+        if form.is_valid():
+            selected_status = form.cleaned_data['status']
+            queue_item.status = selected_status
+            queue_item.save()
+
+            return redirect('queueDetail', pk=books.pk)
+
+        return render(request, "detailQueue.html", {'form': form, 'book': books})

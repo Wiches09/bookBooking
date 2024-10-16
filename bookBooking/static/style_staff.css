@@ -80,3 +80,23 @@ nav a:visited {
   float: right;
   border-radius: 10px;
 }
+
+.searchBar {
+  display: flex;
+  width: 100%;
+}
+
+.queue-table {
+  width: 100%;
+  text-align: left;
+  border-spacing: 0;
+}
+
+.queue-table th, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.queue-table th {
+  text-align: center;
+}

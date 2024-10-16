@@ -10,18 +10,36 @@
 </head>
 <body>
     {% block content %}
-    {% for queue in borrow_histories %}
-    <div class="list-book" style="">
-            <div class="book-cover" style="">
-                <p>pretend its book cover no.{{book.id}}</p>
-            </div>
-            <div class="book-detail" style="">
-                <p>{{ queue.member.first_name }}</p>
-            </div>
-        </div>
-    {% empty %}
-    <p>There is no queue </p>
-    {% endfor %}
+    <h1>คิวยืมหนังสือ {{ book.name }}</h1>
+    <table class="queue-table">
+        <tr>
+            <th>ชื่อสมาชิก</th>
+            <th>วันที่จองคิว</th>
+            <th>วันที่ยืม</th>
+            <th>สถานะ</th>
+        </tr>
+        {% for item in queue %}
+        <tr>
+            <td>{{ item.queue_item.history.member.username }}</td>
+            <td>{{ item.queue_item.queue_date }}</td>
+            <td>{{ item.queue_item.borrow_date }}</td>
+            <td>
+                {% if forloop.first %}
+                    <form method="post" action="{% url 'queueDetail' book.pk %}">
+                        {% csrf_token %}
+                        {{ item.form }}
+                        <input type="hidden" name="queue_item_id" value="{{ item.queue_item.id }}">
+                        <button type="submit">Update Status</button>
+                    </form>
+                {% else %}
+                {{ item.queue_item.status }}
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <li>No users are in the queue for this book.</li>
+        {% endfor %}
+    </table>
     {% endblock content %}
 </body>
 </html>
