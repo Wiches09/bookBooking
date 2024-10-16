@@ -24,7 +24,7 @@
     
      <div class="bookList">
         {% for book in books %}
-        <a class ="book-detailLink" href="">
+        <a class ="book-detailLink" href="{% url 'book-detail' book.id%}">
             <div class="book-wrapper">
                 <div class="book-coverWrapper">
                     <img class="book-cover" src="https://th.bing.com/th/id/OIP.xONRNGDuga-3ecOyGMje2AAAAA?rs=1&pid=ImgDetMain">

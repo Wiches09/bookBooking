@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.http import HttpRequest
 from booking.models import *
 from manageBook.models import *
+from datetime import date, time
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
 # Create your views here.
 
@@ -28,19 +30,19 @@ class Index(View):
 class BookDetail(View):
     def get(self, request, book_id):
         book_detail = Book.objects.get(id=book_id)
-        cart, created = Cart.objects.get_or_create(user=request.user)
+        cart, created = Cart.objects.get_or_create(member_id=request.user.id, create_date=date.today())
         book_in_cart = CartItem.objects.filter(cart=cart, book=book_detail.id).exists()
         
         return render(request, "book-detail.html", {
-            "book-detail" : book_detail,
+            "book_detail" : book_detail,
             "book_in_cart" : book_in_cart
         })
     
 class AddToCart(View):
     def post(self, request, book_id):
         book = Book.objects.get(id=book_id)
-        cart, created = Cart.objects.get_or_create(user=request.user)
-        cart_item = CartItem.objects.get_or_create(cart=cart, book=book)
+        cart, created = Cart.objects.get_or_create(member_id=request.user.id)
+        cart_item = CartItem.objects.create(cart=cart, book=book)
 
         
 

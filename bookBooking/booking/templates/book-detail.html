@@ -11,17 +11,36 @@
 <body>
     {% block content %}
     <div class="BookDetail">
-      {% for book-detail in book-detail %}
-      <div class="book-wrapper">
-       <div class="book-coverWrapper"></div> 
+      <h1 id="book_detail_title">{{ book_detail.name }}</h1>
+      <div class="BookDetail-book-wrapper">
+       <div class="book-coverWrapper">
+        <img id="book-detailCover" src="https://th.bing.com/th/id/OIP.xONRNGDuga-3ecOyGMje2AAAAA?rs=1&pid=ImgDetMain">
+       </div> 
+       <div class="book-detail-wrapper">
+        <div><span>ผู้แต่ง</span><span class="detail">{{ book_detail.author }}</span></div>
+        <div>
+          <span>หมวดหนังสือ</span>
+          {% for category in book_detail.categories.all %}
+            <span class="detail">{{ category.name }}</span>
+          {% endfor %}   
+          </div>  
+        <div><span>สำนักพิมพ์</span><span class="detail">{{ book_detail.publisher }}</span></div>
+        <div><span>วัน/เดือน/ปี ที่ตีพิมพ์</span><span class="detail">{{ book_detail.publish_date }}</span></div>
+        <hr>
+        <div>
+          <p>เรื่องย่อ</p>
+          <p>{{ book_detail.description }}</p>
+        </div> 
+       </div>
       </div>
-      <form method="POST" action="">
+        {% csrf_token %}
         <div class="button-wrapper">
-          {{% if book-detail. %}}
-          <button type="submit"></button>
+          {% if book_in_cart %}
+            <p>หนังสือเล่มนี้อยู่ในตะกร้าของคุณอยู่แล้ว</p>
+          {% else %}
+            <button id="addToCart" type="submit">เพิ่มลงตะกร้า</button>
+          {% endif %}
         </div>
-      </form>
-      {% endfor %}
     </div>
     
 
