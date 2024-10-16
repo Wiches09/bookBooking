@@ -7,6 +7,8 @@ from manageBook.models import *
 from django.shortcuts import get_object_or_404
 from datetime import date, time
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.db.models import F
+from datetime import timedelta
 
 # Create your views here.
 
@@ -67,7 +69,10 @@ class BorrowHistoryView(View):
     def get(self, request):
         # if not request.user.is_authenticated:
         #     return redirect('login')
-        borrow_history = BorrowHistory.objects.get(member=request.user)
-        return render(request, "borrow-history", {
+        borrow_history = BorrowHistory.objects.filter(member=request.user).annotate(
+            returned_date=F('borrowbook__borrow_date') + timedelta(days=7)
+        )
+
+        return render(request, "borrow-history.html", {
             'borrow_history': borrow_history
         })

@@ -32,9 +32,11 @@
                 <div class="detail-wrapper">
                     <h3 class="detail">{{ book.name }}</h3>
                     <p class="detail">{{ book.author }}</p>
-                    {% for category in book.categories.all %}
-                    <p class="detail" id="detail-category">{{ category.name }}</p>
-                    {% endfor %}
+                    <div>
+                        {% for category in book.categories.all %}
+                            <span class="detail" id="detail-category">{{ category.name }}</span>
+                        {% endfor %
+                    }</div>
                 </div>
                 <div></div>
             </div>

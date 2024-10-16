@@ -10,8 +10,39 @@
 </head>
 <body>
     {% block content %}
-        {% empty %}
-        <p>คุณไม่มีประวัติการยืม!</p>
+        <div class="history-list-wrapper">
+            <h1 class="booking-title">ประวัติการยืมหนังสือ</h1>
+            <div class="history-list">    
+            {% for history in borrow_history %}
+                    {% for book in history.borrowbook_set.all %}
+                    <div class="history-wrapper">
+                        <div class="historyItems-wrapper">
+                            <div class="book-coverWrapper">
+                                <img class="book-cover" id="history-book-cover" src="https://th.bing.com/th/id/OIP.xONRNGDuga-3ecOyGMje2AAAAA?rs=1&pid=ImgDetMain">
+                            </div>
+                            <div class="history-detail-wrapper">
+                                <div><p class="history-book-title">{{book.book.name }}</span></div>
+                                <div>
+                                    <span>หมวดหนังสือ</span>
+                                    {% for category in book.book.categories.all %}
+                                    <span class="detail">{{ category.name }}</span>
+                                    {% endfor %}
+                                </div> 
+                                <div><span>วัน/เดือน/ปี ทียืม</span><span class="detail-date">{{ book.borrow_date|date:"Y/m/d" }}</span></div>
+                                <div><span>วัน/เดือน/ปี ที่คืน</span><span class="detail-date">{{ history.returned_date|date:"Y/m/d" }}</span></div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                
+                    {% endfor %}
+                {% empty %}
+                <p>คุณไม่มีประวัติการยืม!</p> 
+            {% endfor %} 
+            </div>
+        </div>
     {% endblock content %}
 </body>
 </html>

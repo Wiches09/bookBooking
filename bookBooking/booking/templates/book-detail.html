@@ -25,7 +25,7 @@
           {% endfor %}   
           </div>  
         <div><span>สำนักพิมพ์</span><span class="detail">{{ book_detail.publisher }}</span></div>
-        <div><span>วัน/เดือน/ปี ที่ตีพิมพ์</span><span class="detail">{{ book_detail.publish_date }}</span></div>
+        <div><span>วัน/เดือน/ปี ที่ตีพิมพ์</span><span class="detail">{{ book_detail.publish_date|date:"Y/m/d" }}</span></div>
         <hr>
         <div>
           <p>เรื่องย่อ</p>

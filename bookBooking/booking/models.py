@@ -43,5 +43,3 @@ class BorrowHistory(models.Model):
     member = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True, related_name='borrower')
 
-    def __str__(self):
-        return f"{self.member.first_name} borrow history for {self.borrow_date}"
