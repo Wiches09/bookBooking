@@ -341,7 +341,7 @@ nav a:hover {
 }
 
 /* Borrow Detail */
-.borrowItem-wrapper {
+.borrowItem-wrapper, .borrowList-wrapper {
   background-color: #e7e7e7;
   margin-top: 2%;
   height: 250px;
@@ -376,6 +376,51 @@ nav a:hover {
 .borrow-book-title {
   font-weight: 400;
   font-size: 120%;
+}
+
+/* borrow list */
+
+.count-wrapper {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.count-borrow-wrapper {
+  font-size: 150%;
+  color: #ffffff;
+  background-color: #33cca1;
+  height: 100%;
+}
+
+.borrow-listLink {
+  text-decoration: none;
+}
+
+.borrowList-wrapper:hover {
+  cursor: pointer;
+  background-color: #cfcfcf;
+}
+
+.borrow-date h2 {
+  color: #000000;
+  margin-top: 100px;
+  margin-left: 10%;
+}
+
+.borrow-date {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+.borrow-list-wrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.watch-detail p {
+  text-align: end;
+  margin-right: 20%;
+  margin-top: 200px;
 }
 
 .cart-item {
