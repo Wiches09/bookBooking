@@ -31,12 +31,12 @@ class CartItem(models.Model):
 
 class BorrowBook(models.Model):
     history_id = models.ForeignKey(
-        'booking.BorrowHistory', null=True, blank=True)
+        'booking.BorrowHistory', null=True, blank=True, on_delete=models.CASCADE)
     book_id = models.ForeignKey(
         'manageBook.Book', on_delete=models.CASCADE, null=True, blank=True)
     queue_date = models.DateField(null=True, blank=True)
     borrow_date = models.DateField(null=True, blank=True)
-    status = models.ForeignKey(BookStatus, default=1)
+    status = models.ForeignKey(BookStatus, default=1, on_delete=models.CASCADE)
 
 
 class BorrowHistory(models.Model):
