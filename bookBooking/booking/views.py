@@ -7,7 +7,7 @@ from manageBook.models import *
 from django.shortcuts import get_object_or_404
 from datetime import date, time
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
-from django.db.models import F
+from django.db.models import F, Count
 from datetime import timedelta
 from django.urls import reverse
 
@@ -127,18 +127,18 @@ class BorrowHistoryView(PermissionRequiredMixin, LoginRequiredMixin, View):
         })
 
 
-class BorrowListView(PermissionRequiredMixin, LoginRequiredMixin, View):
+class BorrowDetailView(PermissionRequiredMixin, LoginRequiredMixin, View):
     login_url = '/authen/'
-    permission_required = ["booking.view_borrowhistory"]
+    permission_required = ["booking.view_borrowbook"]
 
-    def get(self, request):
+    def get(self, request, history_id):
         if not request.user.is_authenticated:
             return redirect('login')
-        borrow_list = BorrowBook.objects.filter(history__member=request.user, status__id=2).annotate(
+        borrow_list = BorrowBook.objects.filter(history__member=request.user, status__id=2, history_id=history_id).annotate(
             days_left=F('borrow_date')+timedelta(days=7)-date.today()
         )
 
-        borrow_list2 = BorrowBook.objects.filter(history__member=request.user, status__id=2).annotate(
+        borrow_list2 = BorrowBook.objects.filter(history__member=request.user, status__id=2, history_id=history_id).annotate(
             return_date=F('borrow_date')+timedelta(days=7)
         )
 
@@ -153,3 +153,20 @@ class BorrowListView(PermissionRequiredMixin, LoginRequiredMixin, View):
             'borrow_date': borrow_date
 
         })
+    
+class BorrowListView(PermissionRequiredMixin, LoginRequiredMixin,View):
+    login_url = '/authen/'
+    permission_required = ["booking.view_borrowbook"]
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
+        borrow_list = BorrowBook.objects.filter(history__member=request.user, status__id=2)
+        borrow_count = BorrowHistory.objects.filter(borrowbook__status_id = 2).annotate(borrow_count=Count('borrowbook'))
+        return render(request, "borrow-book-list.html", {
+            'borrow_list': borrow_list,
+            'borrow_count': borrow_count
+        })
+
+

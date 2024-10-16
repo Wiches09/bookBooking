@@ -1,0 +1,35 @@
+{% extends "layout.html" %} {% block page_title %}borrow-book-detail{% endblock page_title %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    
+</head>
+<body>
+    {% block content %}
+        <div class="borrow-list-wrapper">
+            <h1 class="booking-title">รายการยืมหนังสือ</h1>
+            {% for borrow in borrow_list %}
+            <a class="borrow-listLink" href="{% url 'borrow-detail' borrow.history_id%}">
+              <div class="borrowList-wrapper">
+                <div class="count-borrow-wrapper">
+                {% for count in borrow_count %}
+                  <p class="count-wrapper">{{ count.borrow_count }} เล่ม</p>
+                {% endfor %}
+                </div>
+                <div class="borrow-date">
+                  <h2>{{ borrow.borrow_date|date:"Y/m/d" }}</h2>
+                </div>
+                <div class="watch-detail"><p>ดูรายละเอียด -></p></div>
+              </div>
+            </a>
+            {% empty %}
+            <p>คุณไม่มีรายการยืม</p>
+            {% endfor %}
+        </div>
+    {% endblock content %}
+</body>
+</html>
