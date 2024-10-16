@@ -13,7 +13,7 @@
     {% for item in items %}
         <li>
             {{ item.book.name }} - {{ item.book.author }}
-            {% comment %} <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a> {% endcomment %}
+            <a href="{% url 'remove_book' item.product.id %}">Remove</a>
         </li>
 
         {% empty %}

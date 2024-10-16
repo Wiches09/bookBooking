@@ -32,7 +32,6 @@ class IndexView(View):
         })
 
 
-
 class BookDetailView(View):
     def get(self, request, book_id):
         book_detail = Book.objects.get(id=book_id)
@@ -50,7 +49,7 @@ class BookDetailView(View):
         #     return redirect('login')
         book = get_object_or_404(Book, id=book_id)
         cart, created = Cart.objects.get_or_create(member_id=request.user.id)
-        
+
         book_in_cart = CartItem.objects.filter(cart=cart, book=book).exists()
         if not book_in_cart:
             CartItem.objects.create(cart=cart, book=book)
@@ -67,6 +66,7 @@ class CartView(LoginRequiredMixin, View):
 
         return render(request, "cart.html", {'items': items, 'cart': cart})
 
+
 class ConfirmBooking(View):
     def post(self, request, cart_id):
         cart = get_object_or_404(Cart, id=cart_id)
@@ -74,9 +74,9 @@ class ConfirmBooking(View):
 
         for cart_item in books_in_cart:
             book = cart_item.book
-            
+
             borrow_history = BorrowHistory.objects.create(member=request.user)
-            
+
             BorrowBook.objects.create(
                 history=borrow_history,
                 book=book,
@@ -84,11 +84,24 @@ class ConfirmBooking(View):
                 borrow_date=date.today(),
                 status=BookStatus.objects.get(id=1)
             )
-            
+
         cart.items.all().delete()
 
         return redirect('index')
-    
+
+
+class RemoveBookFromCart(View):
+    def post(self, request, cart_id, book_id):
+        cart = get_object_or_404(Cart, id=cart_id)
+        book = get_object_or_404(Book, id=book_id)
+
+        cart_item = CartItem.objects.filter(cart=cart, book=book).first()
+        if cart_item:
+            cart_item.delete()
+
+        return redirect('cart')
+
+
 class BorrowHistoryView(View):
     def get(self, request):
         # if not request.user.is_authenticated:
