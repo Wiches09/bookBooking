@@ -99,6 +99,11 @@ nav a:hover {
 
 .book-detailLink {
   text-decoration: none;
+  padding: 1rem;
+}
+
+.book-detailLink:hover {
+  background-color: #d1d1d19f;
 }
 
 .detail-wrapper h3 {
