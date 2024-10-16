@@ -31,8 +31,9 @@
                 </div>
                 <div class="detail-wrapper">
                     <h3 class="detail">{{ book.name }}</h3>
+                    <p class="detail">{{ book.author }}</p>
                     {% for category in book.categories.all %}
-                    <p class="detail">{{ category.name }}</p>
+                    <p class="detail" id="detail-category">{{ category.name }}</p>
                     {% endfor %}
                 </div>
                 <div></div>

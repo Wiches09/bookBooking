@@ -116,6 +116,10 @@ nav a:hover {
   height: 300px;
 }
 
+#detail-category {
+  color: #777777;
+}
+
 /* login */
 .title {
   text-align: center;
