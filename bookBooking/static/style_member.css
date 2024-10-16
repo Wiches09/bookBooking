@@ -52,7 +52,7 @@ nav a:hover {
 }
 
 /* book-list */
-.columns-search {
+.searchPanel {
   width: 100%;
   display: flex;
 }
@@ -79,7 +79,7 @@ nav a:hover {
   cursor: pointer;
 }
 
-.column-bookList {
+.bookList {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;

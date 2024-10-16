@@ -12,17 +12,17 @@
     {% block content %}
     <!-- search panel -->
     <form action="{% url 'index' %}">
-    <div class="columns-search">
-        <div class="column-searchBar">
+    <div class="searchPanel">
+        <div class="searchBar">
             <input class="input" id="search-bar" type="text" name="search" placeholder="ค้นหาหนังสือ หมวดหนังสือ หรือผู้แต่ง">
         </div>
-        <div class="column-searchBtn">
+        <div class="searchBtn">
           <input class="button" id="search-btn" type="submit" value="Search">
       </div>
     </div>
     <!-- book list -->
     
-     <div class="column-bookList">
+     <div class="bookList">
         {% for book in books %}
         <a class ="book-detailLink" href="">
             <div class="book-wrapper">

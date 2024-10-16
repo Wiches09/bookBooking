@@ -24,3 +24,19 @@ class Index(View):
         return render(request, "index.html", {
             "books": books
         })
+
+class BookDetail(View):
+    def get(self, request):
+        book_detail = Book.objects.all()
+
+        return render(request, "book-detail.html", {
+            "book-detail" : book_detail
+        })
+    
+class AddToCart(View):
+    def post(self, request, book_id):
+        book = Book.objects.get(id=book_id)
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        cart_item = CartItem.objects.get_or_create(cart=cart, book=book)
+
+        return redirect(request, "book-detail.html")
