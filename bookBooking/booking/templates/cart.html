@@ -12,12 +12,24 @@
     {% block content %}
     {% for item in items %}
         <li>
-            {{ item.product.name }} - ${{ item.product.price }}
-            <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
+            {{ item.book.name }} - {{ item.book.author }}
+            {% comment %} <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a> {% endcomment %}
         </li>
-    {% empty %}
+
+        {% empty %}
         <li>Your cart is empty.</li>
-    {% endfor %}
+        {% endfor %}
+
+    {% if items %}
+    <div class="confirm-button">
+        <form id="addToCartForm" method="post" action="{% url 'confirm_booking' cart.id %}">
+            {% csrf_token %}
+            <button id="addToCart" type="submit">ยืนยันการยืม</button>
+        </form>
+    </div>
+    {% endif %}
+
+
 
     {% endblock content %}
 </body>

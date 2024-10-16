@@ -7,11 +7,12 @@ from manageBook.models import *
 from django.shortcuts import get_object_or_404
 from datetime import date, time
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.urls import reverse
 
 # Create your views here.
 
 
-class Index(View):
+class IndexView(View):
     def get(self, request):
         query = request.GET
 
@@ -29,32 +30,45 @@ class Index(View):
         })
 
 
-class BookDetail(View):
+class BookDetailView(View):
     def get(self, request, book_id):
         book_detail = Book.objects.get(id=book_id)
         cart, created = Cart.objects.get_or_create(member_id=request.user.id)
-        book_in_cart = CartItem.objects.filter(cart=cart, book=book_detail.id).exists()
-        
+        book_in_cart = CartItem.objects.filter(
+            cart=cart, book=book_detail.id).exists()
+
         return render(request, "book-detail.html", {
-            "book_detail" : book_detail,
-            "book_in_cart" : book_in_cart
+            "book_detail": book_detail,
+            "book_in_cart": book_in_cart,
         })
 
-
-class AddToCart(View):
     def post(self, request, book_id):
-        book = Book.objects.get(id=book_id)
+        book = get_object_or_404(Book, id=book_id)
         cart, created = Cart.objects.get_or_create(member_id=request.user.id)
-        cart_item = CartItem.objects.create(cart=cart, book=book)
-
         
+        book_in_cart = CartItem.objects.filter(cart=cart, book=book).exists()
+        if not book_in_cart:
+            CartItem.objects.create(cart=cart, book=book)
 
-        return redirect(request, "book-detail.html")
+        return redirect(reverse('book-detail', args=[book.id]))
 
 
-class CartView(View):
+class CartView(LoginRequiredMixin, View):
     def get(self, request):
         cart, created = Cart.objects.get_or_create(member=request.user)
         items = cart.items.all()
+
+        return render(request, "cart.html", {'items': items, 'cart': cart})
+
+class ConfirmBooking(View):
+    def post(self, request, cart_id):
+        cart = get_object_or_404(Cart, id=cart_id)
+        books_in_cart = CartItem.objects.filter(cart=cart)
         
-        return render(request, "cart.html", {'items': items})
+        for cart_item in books_in_cart:
+            book = cart_item.book
+            BorrowHistory.objects.create(member=request.user, book=book)
+            
+        cart.items.all().delete()
+            
+        return redirect('index')

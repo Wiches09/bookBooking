@@ -33,6 +33,7 @@
         </div> 
        </div>
       </div>
+      <form id="addToCartForm" method="post" action="{% url 'book-detail' book_detail.id %}">
         {% csrf_token %}
         <div class="button-wrapper">
           {% if book_in_cart %}
@@ -41,9 +42,8 @@
             <button id="addToCart" type="submit">เพิ่มลงตะกร้า</button>
           {% endif %}
         </div>
+    </form>
     </div>
-    
-
     {% endblock content %}
 </body>
 </html>
