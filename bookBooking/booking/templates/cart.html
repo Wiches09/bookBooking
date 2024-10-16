@@ -13,7 +13,10 @@
     {% for item in items %}
         <li>
             {{ item.book.name }} - {{ item.book.author }}
-            <a href="{% url 'remove_book' item.product.id %}">Remove</a>
+            <form method="post" action="{% url 'remove_book' cart.id item.book.id %}">
+                {% csrf_token %}
+                <button id="removeFromCart" type="submit">เอาหนังสือออก</button>
+            </form>
         </li>
 
         {% empty %}

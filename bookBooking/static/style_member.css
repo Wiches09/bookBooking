@@ -323,3 +323,19 @@ nav a:hover {
   margin-left: 2%;
   color: rgb(170, 58, 58);
 }
+
+#removeFromCart {
+  width: 200px;
+  height: 50px;
+  font-size: 120%;
+  color: #ffffff;
+  border-radius: 50px;
+  border-style: none;
+  background-color: #821717;
+}
+
+#removeFromCart:hover {
+  cursor: pointer;
+  background-color: #5d1414;
+  color: #d9d9d9;
+}
