@@ -14,6 +14,8 @@ main {
   background-color: #d9d9d9;
   margin-left: 15%;
   margin-right: 15%;
+
+  margin-top: 1rem;
   margin-bottom: 3%;
 }
 
@@ -231,4 +233,54 @@ nav a:hover {
 
 .book-detail-wrapper div .detail {
   margin-left: 2%;
+}
+
+/* Borrow History */
+.history-book-title {
+  font-size: 150%;
+}
+
+#history-book-cover {
+  width: 150px;
+  height: 200px;
+}
+
+.booking-title {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.history-list {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.historyItems-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 2%;
+}
+
+.history-detail-wrapper {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+.history-detail-wrapper div {
+  margin-bottom: 2%;
+}
+
+.history-wrapper {
+  background-color: #e7e7e7;
+  margin-top: 2%;
+  height: 250px;
+  font-size: 120%;
+}
+
+.history-detail-wrapper div .detail {
+  margin-left: 2%;
+}
+.history-detail-wrapper div .detail-date {
+  margin-left: 2%;
+  color: rgb(170, 58, 58);
 }
