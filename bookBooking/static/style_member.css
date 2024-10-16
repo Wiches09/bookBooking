@@ -55,6 +55,16 @@ nav a:hover {
 }
 
 /* book-list */
+.detail-wrapper div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-wrapper div span {
+  margin-left: 2%;
+}
+
 .searchPanel {
   padding: 2%;
   width: 100%;
