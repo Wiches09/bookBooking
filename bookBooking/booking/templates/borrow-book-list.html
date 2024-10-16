@@ -16,9 +16,6 @@
             <a class="borrow-listLink" href="{% url 'borrow-detail' borrow.history_id%}">
               <div class="borrowList-wrapper">
                 <div class="count-borrow-wrapper">
-                {% for count in borrow_count %}
-                  <p class="count-wrapper">{{ count.borrow_count }} เล่ม</p>
-                {% endfor %}
                 </div>
                 <div class="borrow-date">
                   <h2>{{ borrow.borrow_date|date:"Y/m/d" }}</h2>

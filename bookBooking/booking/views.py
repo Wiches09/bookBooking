@@ -163,10 +163,8 @@ class BorrowListView(PermissionRequiredMixin, LoginRequiredMixin,View):
             return redirect('login')
         
         borrow_list = BorrowBook.objects.filter(history__member=request.user, status__id=2)
-        borrow_count = BorrowHistory.objects.filter(borrowbook__status_id = 2).annotate(borrow_count=Count('borrowbook'))
         return render(request, "borrow-book-list.html", {
             'borrow_list': borrow_list,
-            'borrow_count': borrow_count
         })
 
 
