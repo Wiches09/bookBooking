@@ -80,3 +80,21 @@ class QueueDetailView(PermissionRequiredMixin, LoginRequiredMixin, View):
             return redirect('queueDetail', pk=books.pk)
 
         return render(request, "detailQueue.html", {'form': form, 'book': books})
+
+
+class AddBook(PermissionRequiredMixin, LoginRequiredMixin, View):
+    login_url = '/authen/'
+    permission_required = ["booking.change_bookstatus"]
+    
+    def get(self, request: HttpRequest):
+        form = AddBookForm()
+        return render(request, "addBook.html", {'form': form})
+
+    def post(self, request):
+        form = AddBookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('addBook')
+        else:
+            form = AddBookForm()
+        return render(request, 'addBook.html', {'form': form})
