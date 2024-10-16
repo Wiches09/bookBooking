@@ -191,6 +191,36 @@ nav a:hover {
   margin-left: 20px;
 }
 
+/* Register */
+.register-panel {
+  margin-top: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-submitBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4%;
+}
+
+.register-submitBtn button {
+  width: 200px;
+  height: 50px;
+  border-radius: 50px;
+  border-style: none;
+  font-size: 150%;
+  color: #000000;
+}
+
+.register-submitBtn button:hover {
+  background-color: #2cad89;
+  color: #d9d9d9;
+  cursor: pointer;
+}
+
 /* Book detail */
 #book_detail_title {
   text-align: center;

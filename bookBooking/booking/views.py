@@ -82,8 +82,8 @@ class ConfirmBooking(View):
     
 class BorrowHistoryView(View):
     def get(self, request):
-        # if not request.user.is_authenticated:
-        #     return redirect('login')
+        if not request.user.is_authenticated:
+            return redirect('login')
         borrow_history = BorrowHistory.objects.filter(member=request.user).annotate(
             returned_date=F('borrowbook__borrow_date') + timedelta(days=7)
         )
