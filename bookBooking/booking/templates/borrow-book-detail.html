@@ -1,0 +1,41 @@
+{% extends "layout.html" %} {% block page_title %}borrow-book-detail{% endblock page_title %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    
+</head>
+<body>
+    {% block content %}
+        <div class="borrow-list-wrapper">
+            <h1 class="booking-title">รายการยืมหนังสือ - {{ borrow_date|date:"Y-m-d" }} </h1>
+            {% for borrow in borrow_list %}
+            <div class="borrowItem-wrapper">
+              <div class="book-coverWrapper">
+                <img class="book-cover" id="borrow-book-cover" src="https://th.bing.com/th/id/OIP.xONRNGDuga-3ecOyGMje2AAAAA?rs=1&pid=ImgDetMain">
+              </div>
+              <div class="borrow-detail-wrapper">
+                <div><span class="borrow-book-title">{{borrow.book.name }}</span></div>
+                <div>
+                  <span>หมวดหนังสือ</span>
+                  {% for category in borrow.book.categories.all %}
+                    <span class="detail">{{ category.name }}</span>
+                  {% endfor %}
+                </div>
+                {% for return_date in borrow_list2 %}
+                <div><span>วัน/เดือน/ปี ทีต้องคืน</span><span class="detail-date">{{ return_date.return_date|date:"Y/m/d" }}</div>
+                {% endfor %}
+                <div><span>สถานะ</span><span class="borrow-status">กำลังยืม</span></div>
+                <div class="days-left"><span>เหลือเวลาอีก</span><span>{{ borrow.days_left }}</span></div>
+              </div>
+            </div>
+            {% empty %}
+            <p>คุณไม่มีรายการยืม</p>
+            {% endfor %}
+        </div>
+    {% endblock content %}
+</body>
+</html>

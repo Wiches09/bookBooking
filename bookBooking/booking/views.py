@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.db.models import Q
+from django.db.models import Q, DurationField
 from django.http import HttpRequest
 from booking.models import *
 from manageBook.models import *
@@ -112,4 +112,26 @@ class BorrowHistoryView(View):
 
         return render(request, "borrow-history.html", {
             'borrow_history': borrow_history
+        })
+    
+class BorrowListView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        borrow_list = BorrowBook.objects.filter(history__member=request.user, status__id=2).annotate(
+            days_left=F('borrow_date')+timedelta(days=7)-date.today()
+        )
+
+        borrow_list2 = BorrowBook.objects.filter(history__member=request.user, status__id=2).annotate(
+            return_date=F('borrow_date')+timedelta(days=7)
+        )
+
+        if borrow_list.exists():
+            borrow_date = borrow_list.first().borrow_date
+
+        return render(request, "borrow-book-detail.html", {
+            'borrow_list': borrow_list,
+            'borrow_list2': borrow_list2,
+            'borrow_date': borrow_date
+
         })

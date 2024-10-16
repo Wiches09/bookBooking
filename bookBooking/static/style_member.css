@@ -319,7 +319,7 @@ nav a:hover {
 .history-detail-wrapper div .detail {
   margin-left: 2%;
 }
-.history-detail-wrapper div .detail-date {
+.detail-date {
   margin-left: 2%;
   color: rgb(170, 58, 58);
 }
@@ -338,4 +338,42 @@ nav a:hover {
   cursor: pointer;
   background-color: #5d1414;
   color: #d9d9d9;
+}
+
+/* Borrow Detail */
+.borrowItem-wrapper {
+  background-color: #e7e7e7;
+  margin-top: 2%;
+  height: 250px;
+  font-size: 120%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.borrow-detail-wrapper {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+#borrow-book-cover {
+  width: 150px;
+  height: 200px;
+}
+
+.borrow-status{
+  margin-left: 4%;
+  color: rgba(116, 116, 20, 0.89);
+}
+
+.days-left span {
+  margin-right: 4%;
+}
+
+.borrow-detail-wrapper div {
+  margin-top: 3%;
+}
+
+.borrow-book-title {
+  font-weight: 400;
+  font-size: 120%;
 }

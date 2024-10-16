@@ -9,5 +9,6 @@ urlpatterns = [
     path("cart/<int:cart_id>/<int:book_id>",
          views.RemoveBookFromCart.as_view(), name="remove_book"),
     path("index/<int:book_id>", views.BookDetailView.as_view(), name="book-detail"),
-    path("history/", views.BorrowHistoryView.as_view(), name="history")
+    path("history/", views.BorrowHistoryView.as_view(), name="history"),
+    path("borrow/", views.BorrowListView.as_view(), name="borrow-detail"),
 ]
