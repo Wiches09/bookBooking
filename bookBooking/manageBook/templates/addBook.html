@@ -10,7 +10,60 @@
 </head>
 <body>
     {% block content %}
-    
+    <h1>Add New Book</h1>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div>
+            <label for="{{ form.name.id_for_label }}">Book Name</label><br>
+            {{ form.name }}<br>
+            {% if form.name.errors %}
+                <span class="error">{{ form.name.errors }}</span>  <!-- Display field errors -->
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.author.id_for_label }}">Book Author</label><br>
+            {{ form.author }}<br>
+            {% if form.author.errors %}
+                <span class="error">{{ form.author.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.publisher.id_for_label }}">Book Publisher</label><br>
+            {{ form.publisher }}<br>
+            {% if form.publisher.errors %}
+                <span class="error">{{ form.publisher.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.publish_date.id_for_label }}">Publish Date</label><br>
+            {{ form.publish_date }}<br>
+            {% if form.publish_date.errors %}
+                <span class="error">{{ form.publish_date.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.categories.id_for_label }}">Categories</label><br>
+            {{ form.categories }}<br>
+            {% if form.categories.errors %}
+                <span class="error">{{ form.categories.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.description.id_for_label }}">Description</label><br>
+            {{ form.description }}<br>
+            {% if form.description.errors %}
+                <span class="error">{{ form.description.errors }}</span>
+            {% endif %}
+        </div>
+
+        <button type="submit">Add Book</button>
+    </form>
     {% endblock content %}
 </body>
 </html>
