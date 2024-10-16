@@ -59,8 +59,8 @@ class BookDetailView(View):
 
 class CartView(LoginRequiredMixin, View):
     def get(self, request):
-        # if not request.user.is_authenticated:
-        #     return redirect('login')
+        if not request.user.is_authenticated:
+            return redirect('login')
         cart, created = Cart.objects.get_or_create(member=request.user)
         items = cart.items.all()
 
@@ -104,8 +104,8 @@ class RemoveBookFromCart(View):
 
 class BorrowHistoryView(View):
     def get(self, request):
-        # if not request.user.is_authenticated:
-        #     return redirect('login')
+        if not request.user.is_authenticated:
+            return redirect('login')
         borrow_history = BorrowHistory.objects.filter(member=request.user).annotate(
             returned_date=F('borrowbook__borrow_date') + timedelta(days=7)
         )

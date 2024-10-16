@@ -145,26 +145,25 @@ nav a:hover {
   margin-top: 10%;
 }
 
-.columns-login {
+.login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
-.column-username,
-.column-password,
-.column-submitBtn {
+.login-panel {
   margin-top: 20%;
 }
 
-.column-submitBtn {
+.login-submitBtn {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10%;
 }
 
-.column-submitBtn button {
+.login-submitBtn button {
   width: 130px;
   height: 50px;
   border-radius: 50px;
@@ -173,7 +172,7 @@ nav a:hover {
   font-size: 120%;
 }
 
-.column-submitBtn button:hover {
+.login-submitBtn button:hover {
   cursor: pointer;
   background-color: #2cad89;
   color: #d9d9d9;
@@ -189,6 +188,36 @@ nav a:hover {
   border-radius: 10px;
   border-style: none;
   margin-left: 20px;
+}
+
+/* Register */
+.register-panel {
+  margin-top: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-submitBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4%;
+}
+
+.register-submitBtn button {
+  width: 200px;
+  height: 50px;
+  border-radius: 50px;
+  border-style: none;
+  font-size: 150%;
+  color: #000000;
+}
+
+.register-submitBtn button:hover {
+  background-color: #2cad89;
+  color: #d9d9d9;
+  cursor: pointer;
 }
 
 /* Book detail */
