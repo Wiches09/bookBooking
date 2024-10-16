@@ -26,11 +26,14 @@ class Index(View):
         })
 
 class BookDetail(View):
-    def get(self, request):
-        book_detail = Book.objects.all()
-
+    def get(self, request, book_id):
+        book_detail = Book.objects.get(id=book_id)
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        book_in_cart = CartItem.objects.filter(cart=cart, book=book_detail.id).exists()
+        
         return render(request, "book-detail.html", {
-            "book-detail" : book_detail
+            "book-detail" : book_detail,
+            "book_in_cart" : book_in_cart
         })
     
 class AddToCart(View):
@@ -38,5 +41,7 @@ class AddToCart(View):
         book = Book.objects.get(id=book_id)
         cart, created = Cart.objects.get_or_create(user=request.user)
         cart_item = CartItem.objects.get_or_create(cart=cart, book=book)
+
+        
 
         return redirect(request, "book-detail.html")
