@@ -34,7 +34,7 @@ class BorrowBook(models.Model):
         'booking.BorrowHistory', null=True, blank=True, on_delete=models.CASCADE)
     book = models.ForeignKey(
         'manageBook.Book', on_delete=models.CASCADE, null=True, blank=True)
-    queue_date = models.DateField(null=True)
+    queue_date = models.DateTimeField(null=True)
     borrow_date = models.DateField(null=True, blank=True)
     status = models.ForeignKey(BookStatus, default=1, on_delete=models.CASCADE)
 

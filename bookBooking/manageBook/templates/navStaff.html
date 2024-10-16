@@ -12,11 +12,11 @@
     <div>
         <header>
           <nav>
-            <a href="" class="web-logo" style="">Name</a>
+            <a href="{% url 'manageBook' %}" class="web-logo" style="">Name</a>
             <div style="width: 50%;"></div>
-            <a href="">จัดการคิว</a>
+            <a href="{% url 'manageBook' %}">จัดการคิว</a>
             <a href="">จัดการหนังสือ</a>
-            <a href="">ออกจากระบบ</a>
+            <a href="{% url 'logout' %}">ออกจากระบบ</a>
           </nav>
         </header>
     </div>
