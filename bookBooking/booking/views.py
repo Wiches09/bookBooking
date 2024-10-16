@@ -60,8 +60,8 @@ class BookDetailView(View):
 
 class CartView(LoginRequiredMixin, View):
     def get(self, request):
-        # if not request.user.is_authenticated:
-        #     return redirect('login')
+        if not request.user.is_authenticated:
+            return redirect('login')
         cart, created = Cart.objects.get_or_create(member=request.user)
         items = cart.items.all()
 
