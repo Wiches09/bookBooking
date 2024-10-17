@@ -5,7 +5,7 @@ from django.http import HttpRequest
 from booking.models import *
 from manageBook.models import *
 from django.shortcuts import get_object_or_404
-from datetime import date, time
+from datetime import date, time, datetime
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.db.models import F, Count
 from datetime import timedelta
@@ -86,7 +86,7 @@ class ConfirmBooking(PermissionRequiredMixin, LoginRequiredMixin, View):
             BorrowBook.objects.create(
                 history=borrow_history,
                 book=book,
-                queue_date=date.today(),
+                queue_date=datetime.today(),
                 borrow_date=date.today(),
                 status=BookStatus.objects.get(id=1)
             )
@@ -134,11 +134,11 @@ class BorrowDetailView(PermissionRequiredMixin, LoginRequiredMixin, View):
     def get(self, request, history_id):
         if not request.user.is_authenticated:
             return redirect('login')
-        borrow_list = BorrowBook.objects.filter(history__member=request.user, status__id=2, history_id=history_id).annotate(
+        borrow_list = BorrowBook.objects.filter(history__member=request.user, status__id__range=(1, 3), history_id=history_id).annotate(
             days_left=F('borrow_date')+timedelta(days=7)-date.today()
         )
 
-        borrow_list2 = BorrowBook.objects.filter(history__member=request.user, status__id=2, history_id=history_id).annotate(
+        borrow_list2 = BorrowBook.objects.filter(history__member=request.user, status__id__range=(1, 3), history_id=history_id).annotate(
             return_date=F('borrow_date')+timedelta(days=7)
         )
 
@@ -153,18 +153,18 @@ class BorrowDetailView(PermissionRequiredMixin, LoginRequiredMixin, View):
             'borrow_date': borrow_date
 
         })
-    
-class BorrowListView(PermissionRequiredMixin, LoginRequiredMixin,View):
+
+
+class BorrowListView(PermissionRequiredMixin, LoginRequiredMixin, View):
     login_url = '/authen/'
     permission_required = ["booking.view_borrowbook"]
 
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('login')
-        
-        borrow_list = BorrowBook.objects.filter(history__member=request.user, status__id=2)
+
+        borrow_list = BorrowBook.objects.filter(
+            history__member=request.user, status__id__range=(1, 3))
         return render(request, "borrow-book-list.html", {
             'borrow_list': borrow_list,
         })
-
-

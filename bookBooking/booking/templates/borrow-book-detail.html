@@ -28,7 +28,7 @@
                 {% for return_date in borrow_list2 %}
                 <div><span>วัน/เดือน/ปี ทีต้องคืน</span><span class="detail-date">{{ return_date.return_date|date:"Y/m/d" }}</div>
                 {% endfor %}
-                <div><span>สถานะ</span><span class="borrow-status">กำลังยืม</span></div>
+                <div><span>สถานะ</span><span class="borrow-status">{{ borrow.status }}</span></div>
                 <div class="days-left"><span>เหลือเวลาอีก</span><span>{{ borrow.days_left }}</span></div>
               </div>
             </div>
